@@ -1,0 +1,40 @@
+# Agent Wallet Firewall policy. Lives in ~/.agent-wallet-firewall/policy.yaml.
+# The agent cannot read or change this file, so it is the trusted source of what you want.
+
+# In plain words: what is the agent allowed to do with this wallet?
+# The intent check compares every transaction against this text.
+mandate: >
+  Make small test payments in ETH or USDC to my own addresses.
+  Never approve token spending. Never touch NFTs.
+
+limits:
+  max_per_tx_eth: 0.01      # hard limit per transaction
+  daily_eth: 0.05           # hard limit per 24 hours
+  max_tx_per_hour: 10       # stops "death by a thousand cuts"
+  tokens:                   # tokens not listed here always need your approval
+    "0x036CbD53842c5426634e7929541eC2318f3dCF7e":   # USDC on Base Sepolia
+      symbol: USDC
+      decimals: 6
+      max_per_tx: 20
+      daily: 100
+
+recipients:
+  mode: ask_unknown         # allowlist_only | ask_unknown | open
+  allow: []                 # your own addresses, friends, shops you trust
+  block: []
+
+approvals:
+  block_unlimited: true     # unlimited approvals are how most drains start
+  allowed_spenders: []      # e.g. a DEX router you trust (limited approvals only)
+
+contract_calls:
+  allowed_contracts: []     # contracts the agent may call without asking
+
+human_approval:
+  above_eth: 0.005          # bigger payments need a tap on your phone
+  timeout_seconds: 120      # no answer = rejected
+
+intent_check:
+  enabled: true             # needs ANTHROPIC_API_KEY in ~/.agent-wallet-firewall/.env
+  model: claude-opus-5-5
+  when_unavailable: ask     # what to do if the check cannot run: ask | deny | allow

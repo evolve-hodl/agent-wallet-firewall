@@ -1,0 +1,49 @@
+{
+  "name": "agent-wallet-firewall",
+  "version": "0.1.0",
+  "description": "A firewall between AI agents and wallets. Checks every transaction against rules, simulation, threat lists and the owner's intent before it is signed.",
+  "type": "module",
+  "bin": {
+    "agent-wallet-firewall": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "policy.example.yaml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "bench": "tsx src/cli.ts bench",
+    "test": "tsx src/cli.ts bench",
+    "prepare": "tsc"
+  },
+  "keywords": [
+    "mcp",
+    "ai-agents",
+    "wallet",
+    "security",
+    "firewall",
+    "x402",
+    "prompt-injection",
+    "ethereum",
+    "base"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "viem": "^2.57.11",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
