@@ -80,7 +80,9 @@ export function init(): void {
   }
   lines.push(
     "",
-    "Next: edit policy.yaml (your mandate and limits), then add this to your MCP client config:",
+    "Next: edit policy.yaml (your mandate and limits).",
+    "Without ANTHROPIC_API_KEY in .env every payment needs your approval; set intent_check.enabled: false to try it without.",
+    "Then add this to your MCP client config:",
     JSON.stringify({ mcpServers: { "agent-wallet-firewall": { command: stableNodePath(), args: [join(packageRoot, "dist", "cli.js")] } } }, null, 2),
   );
   console.log(lines.join("\n"));

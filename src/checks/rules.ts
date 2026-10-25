@@ -27,7 +27,7 @@ export function checkRules(p: Proposal, policy: Policy, ledger: Ledger, now: num
   const a = p.action;
 
   if (ledger.txSince(now - HOUR) >= limits.max_tx_per_hour) {
-    out.push({ check: "rate_limit", verdict: "deny", reason: `More than ${limits.max_tx_per_hour} transactions in the last hour` });
+    out.push({ check: "rate_limit", verdict: "deny", reason: `Already ${limits.max_tx_per_hour} transactions in the last hour, the hourly maximum` });
   }
 
   const value = p.tx.value;

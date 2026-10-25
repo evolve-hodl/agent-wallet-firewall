@@ -17,6 +17,7 @@
     "dev": "tsx src/cli.ts",
     "bench": "tsx src/cli.ts bench",
     "test": "tsx src/cli.ts bench",
+    "e2e": "tsc && node test/e2e.mjs",
     "prepare": "tsc"
   },
   "keywords": [
